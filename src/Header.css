@@ -1,0 +1,42 @@
+/* NAVBAR */
+#navbar {
+    min-height: 60px;
+}
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+#navbar .navbar-center {
+    padding-top: 12px;
+	padding-left: 25%;
+	width: 70%;
+}
+
+.navbar-inverse {
+    background-color: #fff;
+}
+
+.navbar-nav {
+    margin-right: 0px;
+}
+
+.navbar-header {
+    padding-left: 15px;
+}
+
+.navbar-header a {
+	text-decoration: none;
+	color: black;
+}
+
+.navbar-logo {
+    float: left;
+    height: 50px;
+    padding-top: 20px;
+    line-height: 20px;
+    width: 130px;
+    position: absolute;
+    z-index: 10000;
+    padding-left: 0px;
+	font-size: 26px;
+}

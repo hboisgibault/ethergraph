@@ -1,0 +1,10 @@
+#content {
+	position: absolute;
+	min-height: 100%;
+	width: 100%;
+}
+#graph {
+	position: absolute;
+	min-height: 100%;
+	width: 100%;
+}

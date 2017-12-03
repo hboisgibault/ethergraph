@@ -1,0 +1,15 @@
+html {
+  min-height: 100%;
+}
+body {
+  background-color: black;
+  min-height: 100%;
+  position: absolute;
+  width: 100%;
+}
+#root {
+  background-color: black;
+  min-height: 100%;
+  position: absolute;
+  width: 100%;
+}

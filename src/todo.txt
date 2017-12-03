@@ -1,0 +1,16 @@
+Reste à faire:
+
+    => Comportement graphe terminé
+    - Informations adresse/transaction
+    - Différencier transaction/adresse
+    - Routes
+    - Erreurs
+    => Comportement global mis au point
+    - Physique
+	- Couleurs
+	- Design général
+	- Footer
+	=> Design terminé
+	- Mettre sur Heroku         
+	- Nom de domaine                   
+	=> En ligne
