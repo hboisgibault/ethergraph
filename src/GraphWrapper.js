@@ -3,6 +3,7 @@ import GraphComponent from 'react-graph-vis';
 import './GraphWrapper.css';
 import {Graph, initOptions, availableColors} from './GraphHelpers';
 import {getQueries} from './EtherAPI';
+import {Alert} from 'react-bootstrap';
 
 const axios = require('axios');
 
@@ -20,6 +21,8 @@ class GraphWrapper extends React.Component {
 			addresses: [],
 			tokens: {"ETH": "blue"},
 			unusedColors: availableColors,
+			showError: false,
+			error: "",
 		};
 	}
 
@@ -55,14 +58,35 @@ class GraphWrapper extends React.Component {
 	
 	getTransactions(input, resetGraph) {
 		var queries = getQueries(input);
-		axios.all([
-			axios.get(queries[0]),
-			axios.get(queries[1])
-		]).then((result) => {
-			var data1 = result[0].data;
-			var data2 = result[1].data;
-			// Test errors
-			var allTransactions = data1.concat(data2["operations"]);
+		if("error" in queries || queries.length == 0) {
+			this.setState({
+				error: (queries.length == 0) ? "Please verify your input." : queries["error"],
+				showError: true,
+			})
+			return false;
+		}
+		axios.all(
+			queries.map(axios.get)
+		).then((result) => {
+			if("error" in result || result.length == 0) {
+				this.setState({
+					error: (result.length == 0) ? "Invalid input." : result["error"],
+					showError: true,
+				})
+				return false;
+			}
+			// Get list of transactions
+			var allTransactions = [];
+			for(var i=0; i < result.length; i++) {
+				var data = result[i].data;
+				if("operations" in data) {
+					allTransactions = allTransactions.concat(data["operations"]);
+				}
+				else {
+					allTransactions = allTransactions.concat(data);
+				}
+			}
+			// Build graph
 			var g = Object();
 			if(resetGraph) {
 				g = new Graph([], [], {}, {"ETH": "blue"}, availableColors);
@@ -82,6 +106,7 @@ class GraphWrapper extends React.Component {
 				unusedColors: g.unusedColors
 			});
 		});
+		return true;
 	}
 	
 	componentWillReceiveProps(nextProps) {
@@ -92,9 +117,16 @@ class GraphWrapper extends React.Component {
 		}
 	}
 	
+	componentDidMount() {
+		if(this.props.input != "") {
+			this.getTransactions(this.props.input, true);
+		}
+	}
+	
     render() {
         return (
 			<div id="graph">
+				{ this.state.showError ? <Alert bsStyle="danger">{this.state.error}</Alert> : null }
 				<GraphComponent graph={this.state.graph} options={this.state.options} events={this.events} style={{ position: "absolute", height: "100%", width: "100%" }}/>
             </div>
         );

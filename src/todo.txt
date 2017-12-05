@@ -1,16 +1,20 @@
 Reste à faire:
 
-    => Comportement graphe terminé
+=> Comportement graphe terminé
     - Informations adresse/transaction
-    - Différencier transaction/adresse
-    - Routes
+OK  - Différencier transaction/adresse
+=>  - Routes
+OK		- Comportement général
+		- Changer URL lors de la recherche
     - Erreurs
-    => Comportement global mis au point
+=> Comportement global mis au point
     - Physique
 	- Couleurs
-	- Design général
+	- Design accueil
+	- Design 404
 	- Footer
-	=> Design terminé
-	- Mettre sur Heroku         
-	- Nom de domaine                   
-	=> En ligne
+=> Design terminé
+OK	- Mettre sur Heroku
+	- Nom de domaine      
+=> En ligne
+	- Limiter le nombre de requêtes vers l'API

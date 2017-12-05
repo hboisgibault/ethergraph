@@ -1,5 +1,4 @@
 import React from 'react';
-import {Router, Route, Link} from 'react-router'
 import './Content.css';
 import GraphWrapper from './GraphWrapper';
 import Sidebar from './Sidebar';
@@ -23,8 +22,8 @@ class Content extends React.Component {
     render() {
         return (
             <div id="content">
-					<GraphWrapper input={this.props.input} onSelectedChange={this.handleSelectedChange} />
-					<Sidebar selectedElement={this.state.selectedElement} />
+				<GraphWrapper input={this.props.input} onSelectedChange={this.handleSelectedChange} />
+				<Sidebar selectedElement={this.state.selectedElement} />
 			</div>
         );
     }

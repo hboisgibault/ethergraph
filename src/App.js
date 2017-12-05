@@ -4,6 +4,9 @@ import './App.css';
 import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
+import Main from './Main';
+import NotFound from './NotFound';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 class App extends Component {
 	constructor(props) {
@@ -22,11 +25,16 @@ class App extends Component {
 	
 	render() {
     return (
+	<BrowserRouter>
       <div>
-        <Header input={this.state.input} onInputChange={this.handleInputChange} />
-		<Content input={this.state.input}/>
-		<Footer/>
+		<Switch>
+			<Route exact path="/" component={Main} routeName="home"/>
+			<Route path="/address/:address" component={Main} routeName="addressView"/>
+			<Route path="/tx/:txHash" component={Main} routeName="txView"/>
+			<Route path="*" component={NotFound}/>
+		</Switch>	
       </div>
+	</BrowserRouter>
     );
   }
 }
