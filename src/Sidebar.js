@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
 					<div className="sidebar-title">
 						<b>Address</b>
 					</div>
-					<div className="sidebar-element"><a href="https://ethplorer.io/address/">{this.props.selectedElement["address"]}</a></div>
+					<div className="sidebar-element"><a href={"https://ethplorer.io/address/" + this.props.selectedElement["address"]} target="_blank" rel="noopener norefferer">{this.props.selectedElement["address"]}</a></div>
 				</div>
 			);
 		}
