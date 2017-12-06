@@ -1,10 +1,11 @@
 import React from 'react';
 import './Header.css';
-import {Navbar, FormGroup, FormControl, Button} from 'react-bootstrap';
+import {Navbar, FormGroup, FormControl, Button, Glyphicon} from 'react-bootstrap';
 
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
+		console.log(props);
 		this.state = {
 			input: ""
 		}
@@ -32,9 +33,9 @@ class Header extends React.Component {
                     </Navbar.Brand>
                 </Navbar.Header>
 				<Navbar.Collapse>
-					<Navbar.Form pullLeft>
-						<FormGroup>
-							<FormControl type="text" 
+					<Navbar.Form className="searchBar" pullLeft>
+						<FormGroup className="searchFormGroup">
+							<FormControl className="input" type="text" 
 							             value={this.state.input} 
 										 onKeyPress={event => {
 											if(event.key === "Enter") {
@@ -44,8 +45,7 @@ class Header extends React.Component {
 										 onChange={this.handleInputChange} 
 										 placeholder="Address / TX hash" />
 						</FormGroup>
-						{' '}
-						<Button type="submit" onClick={this.handleInputSubmit}>Submit</Button>
+						<Button type="submit" onClick={this.handleInputSubmit}><Glyphicon glyph="search" /></Button>
 					</Navbar.Form>
 				</Navbar.Collapse>
             </Navbar>

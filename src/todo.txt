@@ -4,15 +4,16 @@ Reste à faire:
     - Informations adresse/transaction
 OK  - Différencier transaction/adresse
 =>  - Routes
-OK		- Comportement général
-		- Changer URL lors de la recherche
-    - Erreurs
+OK	- Comportement général
+OK	- Changer URL lors de la recherche
+OK  - Erreurs
 => Comportement global mis au point
-    - Physique
-	- Couleurs
+OK  - Physique
+OK	- Couleurs
 	- Design accueil
 	- Design 404
-	- Footer
+OK	- Header
+OK	- Footer
 => Design terminé
 OK	- Mettre sur Heroku
 	- Nom de domaine      

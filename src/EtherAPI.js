@@ -1,5 +1,4 @@
 const queryString = require('query-string');
-const web3 = require('web3-utils');
 
 var apiUrl = "https://api.ethplorer.io";
 var apiKey = "freekey";
@@ -7,18 +6,6 @@ var apiKey = "freekey";
 function buildQuery(input, action, limit=100) {
 	var params = {apiKey: apiKey, limit: limit};
 	var query = apiUrl + action + input + "?" + queryString.stringify(params);
-	return query;
-}
-
-function buildTransactionsQuery(address, limit=100) {
-	var params = {apiKey: apiKey, limit: limit};
-	var query = apiUrl + "/getAddressTransactions/" + address + "?" + queryString.stringify(params);
-	return query;
-}
-
-function buildOperationsQuery(address, limit=100) {
-	var params = {apiKey: apiKey, limit: limit};
-	var query = apiUrl + "/getAddressHistory/" + address + "?" + queryString.stringify(params);
 	return query;
 }
 
@@ -37,10 +24,10 @@ export function getQueries(input, limit=20) {
 	return queries;	
 }
 
-function isAddress(input) {
+export function isAddress(input) {
 	return input.length == 42;
 }
 
-function isTxHash(input) {
+export function isTxHash(input) {
 	return input.length == 66;
 }

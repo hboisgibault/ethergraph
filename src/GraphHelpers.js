@@ -1,4 +1,6 @@
-export const availableColors = ["white", "#FAA43A", "#DECF3F", "#F15854", "#4D4D4D"];
+export const availableColors = ["#E12C2C", "#FB4D46", "#FFAA1D", "#FFF700", "#299617", "#A7F432", "#5DADEC","#5946B2", "#9C51B6", "#A83731", "#AF6E4D", "#FF5470", "#FF7A00", "#FF007C", "#2E5894", "#a88905", "#4b0101"];
+
+const rootColor = "#A0E6FF";
 
 export const initOptions = {
 	autoResize: true,
@@ -20,6 +22,15 @@ export const initOptions = {
 	},
 	physics: {
 		stabilization: true,
+		enabled: true,
+		barnesHut: {
+			gravitationalConstant: -2000,
+			centralGravity: 0,
+			springLength: 90,
+			springConstant: 0.02,
+			damping: 0.09,
+			avoidOverlap: 0
+		},
 	},
 	interaction: {
 		selectConnectedEdges: false,
@@ -36,7 +47,6 @@ export class Graph {
 	}
 	
 	update(data, rootAddress) {
-		console.log(data);
 		for(var i = 0; i < data.length; i++) {
 			var sender = data[i]["from"];
 			var recipient = data[i]["to"];
@@ -88,9 +98,9 @@ export class Graph {
 	}
 	
 	createNode = function(address, isRoot) {
-		var color = "";
+		var color = "#FEFEFE";
 		if(isRoot) {
-			color = "green";
+			color = rootColor;
 		}
 		var node = {
 			id: this.addresses[address],
@@ -100,6 +110,8 @@ export class Graph {
 			isRoot: isRoot,
 			color: {
 				background: color,
+				border: color,
+				highlight: rootColor,
 			},
 		}
 		return node;

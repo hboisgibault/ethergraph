@@ -19,11 +19,12 @@ class GraphWrapper extends React.Component {
 			options: initOptions,
 			graph: graph,
 			addresses: [],
-			tokens: {"ETH": "blue"},
+			tokens: {"ETH": "#2243B6"},
 			unusedColors: availableColors,
 			showError: false,
 			error: "",
 		};
+		this.handleAlertDismiss = this.handleAlertDismiss.bind(this);
 	}
 
 	events = {
@@ -75,6 +76,7 @@ class GraphWrapper extends React.Component {
 				})
 				return false;
 			}
+			console.log(result);
 			// Get list of transactions
 			var allTransactions = [];
 			for(var i=0; i < result.length; i++) {
@@ -86,6 +88,7 @@ class GraphWrapper extends React.Component {
 					allTransactions = allTransactions.concat(data);
 				}
 			}
+			console.log(allTransactions);
 			// Build graph
 			var g = Object();
 			if(resetGraph) {
@@ -123,10 +126,14 @@ class GraphWrapper extends React.Component {
 		}
 	}
 	
+	handleAlertDismiss() {
+		this.setState({ showError: false });
+	}
+  
     render() {
         return (
 			<div id="graph">
-				{ this.state.showError ? <Alert bsStyle="danger">{this.state.error}</Alert> : null }
+				{ this.state.showError ? <Alert className="error-alert" bsStyle="danger" onDismiss={this.handleAlertDismiss.bind(this)}>{this.state.error}</Alert> : null }
 				<GraphComponent graph={this.state.graph} options={this.state.options} events={this.events} style={{ position: "absolute", height: "100%", width: "100%" }}/>
             </div>
         );
