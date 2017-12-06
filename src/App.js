@@ -5,8 +5,9 @@ import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
 import Main from './Main';
+import Home from './Home';
 import NotFound from './NotFound';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 class App extends Component {
 	constructor(props) {
@@ -26,14 +27,12 @@ class App extends Component {
 	render() {
     return (
 	<BrowserRouter>
-      <div>
 		<Switch>
-			<Route exact path="/" component={Main} routeName="home"/>
-			<Route path="/address/:address" component={Main} routeName="addressView"/>
-			<Route path="/tx/:txHash" component={Main} routeName="txView"/>
+			<Route exact path="/" component={Main}/>
+			<Route path="/address/:address" component={Main}/>
+			<Route path="/tx/:txHash" component={Main}/>
 			<Route path="*" component={NotFound}/>
-		</Switch>	
-      </div>
+		</Switch>
 	</BrowserRouter>
     );
   }

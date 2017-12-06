@@ -37,6 +37,33 @@ export const initOptions = {
 	}
 };
 
+export function randomGraph() {
+	var minNumberNodes = 8;
+	var maxNumberNodes = 12;
+	var nodes = [];
+	var edges = [];
+	var numberNodes = getRandomInt(minNumberNodes, maxNumberNodes);
+	for(var i=0; i < numberNodes; i++) {
+		var color = availableColors[getRandomInt(0, availableColors.length - 1)];
+		var node = {
+			size: 60,
+			color: {
+				background: color,
+				border: color,
+				highlight: color,
+			},
+		}
+		nodes.push(node);
+	}
+	return {nodes: nodes, edges: edges};
+}
+
+function getRandomInt(min, max) {
+  var min = Math.ceil(min);
+  var max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 export class Graph {
 	constructor(nodes, edges, addresses, tokens, unusedColors) {
 		this.nodes = nodes;
@@ -82,7 +109,7 @@ export class Graph {
 			
 			// Add edges
 			if(!this.findTransaction(hash)) {
-				this.edges.push(this.createEdge(this.addresses[sender], this.addresses[recipient], timestamp, hash, token, label));
+				this.edges.push(this.createEdge(sender, recipient, timestamp, hash, token, value, label));
 			}
 		}
 		return false;
@@ -117,11 +144,13 @@ export class Graph {
 		return node;
 	}
 
-	createEdge = function(sender, recipient, timestamp, hash, token, label) {
+	createEdge = function(sender, recipient, timestamp, hash, token, value, label) {
 		var color = this.tokens[token];
 		var edge = {
-			from: sender,
-			to: recipient,
+			from: this.addresses[sender],
+			to: this.addresses[recipient],
+			senderAddress: sender,
+			recipientAddress: recipient,
 			timestamp: timestamp,
 			hash: hash,
 			token: token,
@@ -130,6 +159,7 @@ export class Graph {
 				highlight: color,
 			},
 			label: label,
+			txValue: value,
 			font: {
 				align: 'middle',
 				strokeWidth: 0,

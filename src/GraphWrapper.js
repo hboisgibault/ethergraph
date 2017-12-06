@@ -1,25 +1,23 @@
 import React from 'react';
 import GraphComponent from 'react-graph-vis';
 import './GraphWrapper.css';
-import {Graph, initOptions, availableColors} from './GraphHelpers';
+import {Graph, initOptions, availableColors, randomGraph} from './GraphHelpers';
 import {getQueries} from './EtherAPI';
 import {Alert} from 'react-bootstrap';
 
 const axios = require('axios');
+const ethColor = "#2243B6";
 
 class GraphWrapper extends React.Component {
 	constructor(props) {
 		super(props);
-		var graph = {
-			nodes: [], 
-			edges: []
-		};
+		var graph = randomGraph();
 		this.state = {
 			input: "",
 			options: initOptions,
 			graph: graph,
 			addresses: [],
-			tokens: {"ETH": "#2243B6"},
+			tokens: {"ETH": ethColor},
 			unusedColors: availableColors,
 			showError: false,
 			error: "",
@@ -121,8 +119,11 @@ class GraphWrapper extends React.Component {
 	}
 	
 	componentDidMount() {
-		if(this.props.input != "") {
+		if(this.props.input != "" && this.state.addresses.length == 0) {
 			this.getTransactions(this.props.input, true);
+			this.setState({
+				input: this.props.input
+			});
 		}
 	}
 	

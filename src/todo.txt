@@ -1,7 +1,7 @@
 Reste à faire:
 
 => Comportement graphe terminé
-    - Informations adresse/transaction
+OK  - Informations adresse/transaction
 OK  - Différencier transaction/adresse
 =>  - Routes
 OK	- Comportement général
@@ -10,7 +10,7 @@ OK  - Erreurs
 => Comportement global mis au point
 OK  - Physique
 OK	- Couleurs
-	- Design accueil
+OK	- Design accueil
 	- Design 404
 OK	- Header
 OK	- Footer
@@ -19,3 +19,7 @@ OK	- Mettre sur Heroku
 	- Nom de domaine      
 => En ligne
 	- Limiter le nombre de requêtes vers l'API
+	- Full screen mode
+	- Options
+		- Filtrer par monnaie
+	- Paramètres recherche

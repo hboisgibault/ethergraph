@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './Main.css';
 import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
 import {isAddress, isTxHash} from './EtherAPI';
-import {BrowserRouter,Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 const ADDRESS_INPUT = "ADDRESS_INPUT";
 const TX_INPUT = "TX_INPUT";
@@ -41,7 +41,7 @@ class Main extends Component {
 	
 	render() {
     return (
-	  <div>
+	  <div id="main">
 		<Header input={this.state.input} onInputChange={this.handleInputChange} />
 		<Content input={this.state.input}/>
 		<Footer/>
