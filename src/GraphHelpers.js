@@ -1,4 +1,4 @@
-export const availableColors = ["#E12C2C", "#FB4D46", "#FFAA1D", "#FFF700", "#299617", "#A7F432", "#5DADEC","#5946B2", "#9C51B6", "#A83731", "#AF6E4D", "#FF5470", "#FF7A00", "#FF007C", "#2E5894", "#a88905", "#4b0101"];
+export const availableColors = ["#E12C2C", "#FB4D46", "#FFAA1D", "#FFF700", "#299617", "#A7F432", "#5DADEC","#5946B2", "#9C51B6", "#A83731", "#AF6E4D", "#FF5470", "#FF7A00", "#FF007C", "#2E5894", "#a88905"];
 
 const rootColor = "#A0E6FF";
 
