@@ -3,13 +3,13 @@ const queryString = require('query-string');
 var apiUrl = "https://api.ethplorer.io";
 var apiKey = "freekey";
 
-function buildQuery(input, action, limit=100) {
+function buildQuery(input, action, limit=30) {
 	var params = {apiKey: apiKey, limit: limit};
 	var query = apiUrl + action + input + "?" + queryString.stringify(params);
 	return query;
 }
 
-export function getQueries(input, limit=20) {
+export function getQueries(input, limit=30) {
 	var queries = [];
 	if(isAddress(input)){
 		queries.push(buildQuery(input, "/getAddressTransactions/", limit))
