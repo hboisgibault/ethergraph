@@ -20,7 +20,7 @@ class Footer extends React.Component {
 						<span><b>&nbsp;&nbsp;&nbsp;&nbsp; Donate &nbsp;</b></span>
 						<span>ETH</span>
 						{' '}
-						<span><a href="https://ethplorer.io/address/0xdlkjflkdjfkldjflkdjfkldj" target="_blank" rel="noopener norefferer">0xdlkjflkdjfkldjflkdjfkldj</a></span>
+						<span><a href="https://ethplorer.io/address/0x25092A3a2DD33a7a5e5d8e5c4347374Cc69d2C07" target="_blank" rel="noopener norefferer">0x25092A3a2DD33a7a5e5d8e5c4347374Cc69d2C07</a></span>
 					</div>
 					<div className="acknowledgments pull-right">
 						<span className="text-muted">Powered by ethplorer.io</span>
