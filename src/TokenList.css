@@ -1,0 +1,26 @@
+/* TOKEN LIST */
+
+#control-bar {
+	position: relative;
+	float: left;
+	color: #bcc8d2;
+	width: 7%;
+	height: 40%;
+	font-size: 12px;
+	overflow-y: auto;
+	
+}
+.sidebar-title {
+	font-size: 14px;
+}
+
+.sidebar-element {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sidebar-element a {
+	text-decoration: underline;
+	color: #bcc8d2;
+}

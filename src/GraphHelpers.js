@@ -59,8 +59,8 @@ export function randomGraph() {
 }
 
 function getRandomInt(min, max) {
-  var min = Math.ceil(min);
-  var max = Math.floor(max);
+  min = Math.ceil(min);
+  max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -74,6 +74,10 @@ export class Graph {
 	}
 	
 	update(data, rootAddress) {
+		if(data.length === 0) {
+			this.addresses[rootAddress] = 1;
+			this.nodes.push(this.createNode(rootAddress, true));
+		}
 		for(var i = 0; i < data.length; i++) {
 			var sender = data[i]["from"];
 			var recipient = data[i]["to"];
@@ -115,6 +119,44 @@ export class Graph {
 		return false;
 	}
 	
+	filterEdges(visibleTokens) {
+		for(var i=0; i < this.edges.length; i++) {
+			var visible = visibleTokens[this.edges[i]["token"]];
+			this.edges[i]["hidden"] = visible;
+			this.edges[i]["physics"] = !visible;
+			this.edges[i]["color"]["opacity"] = 0.2;
+		}
+	}
+	
+	lowlightGraph() {
+		for(var i=0; i < this.edges.length; i++) {
+			this.edges[i]["color"]["opacity"] = 0.3;
+		}
+		for(var j=0; j < this.nodes.length; j++) {
+			this.nodes[j]["color"]["opacity"] = 0.3;
+		}
+	}
+	
+	highlightGraph() {
+		for(var i=0; i < this.edges.length; i++) {
+			this.edges[i]["opacity"] = 1;
+		}
+		for(var j=0; j < this.nodes.length; j++) {
+			this.nodes[j]["opacity"] = 1;
+		}
+	}
+	
+	removeIdleNodes() {
+		var nodes = this.nodes;
+		var exploredNodes = [];
+		var idleNodes = [];
+		for(var i=0; i < this.edges.length; i++) {
+			var from = this.edges[i]["from"];
+			var to = this.edges[i]["to"];
+			exploredNodes.push(from);
+		}
+	}
+	
 	findTransaction(hash) {
 		for(var i=0; i < this.edges.length; i++) {
 			if(this.edges[i]["hash"] == hash) {
@@ -139,7 +181,9 @@ export class Graph {
 				background: color,
 				border: color,
 				highlight: rootColor,
+				opacity: 1,
 			},
+			hidden: false,
 		}
 		return node;
 	}
@@ -157,6 +201,7 @@ export class Graph {
 			color: {
 				color: color,
 				highlight: color,
+				opacity: 1,
 			},
 			label: label,
 			txValue: value,
@@ -166,6 +211,7 @@ export class Graph {
 				vadjust: -13,
 				color: color,
 			},
+			hidden: false,
 		};
 		return edge;
 	}

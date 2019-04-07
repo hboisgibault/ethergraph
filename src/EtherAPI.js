@@ -25,9 +25,9 @@ export function getQueries(input, limit=30) {
 }
 
 export function isAddress(input) {
-	return input.length == 42;
+	return input.length === 42;
 }
 
 export function isTxHash(input) {
-	return input.length == 66;
+	return input.length === 66;
 }

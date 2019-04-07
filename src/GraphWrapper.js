@@ -18,6 +18,7 @@ class GraphWrapper extends React.Component {
 			graph: graph,
 			addresses: [],
 			tokens: {"ETH": ethColor},
+			highlightMode: false, // Should be prop
 			unusedColors: availableColors,
 			showError: false,
 			error: "",
@@ -74,7 +75,7 @@ class GraphWrapper extends React.Component {
 				})
 				return false;
 			}
-			console.log(result);
+			//console.log(result);
 			// Get list of transactions
 			var allTransactions = [];
 			for(var i=0; i < result.length; i++) {
@@ -86,7 +87,7 @@ class GraphWrapper extends React.Component {
 					allTransactions = allTransactions.concat(data);
 				}
 			}
-			console.log(allTransactions);
+			// console.log(allTransactions);
 			// Build graph
 			var g = Object();
 			if(resetGraph) {
@@ -95,29 +96,39 @@ class GraphWrapper extends React.Component {
 			else {
 				g = new Graph(this.state.graph.nodes.slice(0), this.state.graph.edges.slice(0), this.state.addresses, this.state.tokens, this.state.unusedColors);
 			}
-			g.update(allTransactions, input.toLowerCase());
-			var graph = {
-				nodes: g.nodes,
-				edges: g.edges,
-			}
+			var rootAddress = input.toLowerCase();
+			g.update(allTransactions, rootAddress);
 			this.setState({
-				graph: graph,
+				graph: g,
 				addresses: g.addresses,
 				tokens: g.tokens,
 				unusedColors: g.unusedColors
 			});
+			var selectedNode = this.getElementByKeyValue(g.nodes, "address", rootAddress);
+			this.props.onSelectedChange(selectedNode);
+			this.props.onTokensChange(this.state.tokens);
 		});
 		return true;
 	}
 	
+	// Handle new input
 	componentWillReceiveProps(nextProps) {
 		if(nextProps.input !== this.state.input) {
 			var input = nextProps.input;
 			this.setState({input: input});
 			this.getTransactions(input, true);
 		}
+		if(nextProps.visibleTokens != this.state.visibleTokens) {
+			console.log(nextProps.visibleTokens);
+			var newGraph = new Graph(this.state.graph.nodes.slice(0), this.state.graph.edges.slice(0), this.state.addresses, this.state.tokens, this.state.unusedColors);
+			newGraph.filterEdges(nextProps.visibleTokens);
+			this.setState({
+				graph: newGraph,
+			});
+		}
 	}
-	
+
+	// Build graph
 	componentDidMount() {
 		if(this.props.input != "" && this.state.addresses.length == 0) {
 			this.getTransactions(this.props.input, true);
